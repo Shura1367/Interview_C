@@ -1,0 +1,91 @@
+ 1.Phân vùng nhớ : Có 5 phân vùng nhớ là : Text , Data ,Bss ,Heap ,Stack
+ 
+1.1  Phân vùng nhớ Text: 
+ - Chỉ có quyền truy cập là Read
+ - Nó chứa lệch để thực thi (instruction) 
+ - Chứa khai báo hằng số  
+1.2  Phân vùng nhớ Data: 
+ - Quyền truy cập: Read & Write
+ - Chứa biến toàn cục hoặc biến Static với giá trị khởi tạo khác không
+ - Được giải phóng khi kết thúc chương trình 
+1.3  Phân vùng nhớ Bss:
+ - Quyền truy cập: Read & Write 
+ - Chứa biến toàn cục hoặc biến Static với giá trị khởi tạo bằng không hoặc không khởi tạo.
+ - Được giải phóng khi kết thúc chương trình  
+1.4   Phân vùng nhớ Heap:
+ - Quyền truy cập: Read & Write
+ - Sử dụng để cấp phát bộ nhớ động: Malloc, Calloc..
+ - Được giải phóng khi gọi hàm Free. 
+1.5  Phân vùng nhớ Stack 
+ - Quyền truy cập: Read-Write
+ - Sử dụng cấp phát cho biến cục bộ,các input parameter của hàm...
+ - Được giải phóng khi ra khỏi block code/hàm
+ 
+ --------***---------
+ 
+ 2.So sánh giữa DATA và BSS :
+- Giống nhau : Cả 2 đều có khả năng Read & Write và chứa biến toàn cục or Static,đều giải phóng khi kết thúc chương trình
+- Khác nhau :
+  + Data: Chứa biến toàn cục hoặc biến Static với giá trị khởi tạo khác không
+  + Bss: Chứa biến toàn cục hoặc biến Static với giá trị khởi tạo bằng không hoặc không khởi tạo.
+ 
+ --------***---------
+ 
+  2.So sánh giữa 2 phân vùng Heap và Stack :
+  
+Giống nhau: cả hai đều là vùng nhớ được tạo ra và lưu trữ trên RAM, có quyền truy cập là Read-Write
+
+Khác nhau:
+ - Stack lưu trữ biến cục bộ trong hàm, tham số truyền vào. Truy cập vào vùng nhớ này rất nhanh, được thực thi khi chương trình được biên dịch.
+ - Vùng nhớ Stack được quản lý bởi hệ điều hành, dữ liệu được lưu trong Stack sẽ tự động hủy khi hàm thực hiện xong công việc của mình.
+ 
+ - Heap lưu trữ cho những biến con trỏ được cấp phát động bởi hàm (Calloc, malloc).
+ - Nếu liên tục cấp phát vùng nhớ mà không giải phóng thì sẽ bị lỗi tràn vùng nhớ Heap 
+ 
+ --------***---------
+ 
+   3.Biến Static :
+ Biến static gồm 2 loại là : Biến Static cục bộ và Biến Static toàn cục:
+3.1 Biến Static cục bộ:
+- Khi 1 biến cục bộ được khai báo với từ khóa static. Biến sẽ chỉ được khởi tạo 1 lần duy nhất và tồn tại suốt thời gian chạy chương trình. Giá trị của nó không bị mất đi ngay cả khi kết thúc hàm. 
+- Biến cục bộ static chỉ có thể được gọi trong nội bộ hàm khởi tạo ra nó.
+- Mỗi lần hàm được gọi, giá trị của biến chính bằng giá trị tại lần gần nhất hàm được gọi.
+3.2 Biến Static toàn cục:
+- Sử dụng được mọi nơi ở chương trình và nó chỉ khai báo 1 lần.
+- Biến toàn cục static sẽ chỉ có thể được truy cập và sử dụng trong File khai báo nó, các File khác không có cách nào truy cập được.  
+
+ --------***---------
+ 
+  4.Marco & Funtion
+4.1. Marco
+- Được xử lý bởi preprocessor.
+- Là cách chuyển vào bản code đầu vào nào đó thành văn bản code đầu ra theo mình muốn.
+4.2. Funtion
+- là một tập hợp những đoạn mã dùng để thực hiện một nhiệm vụ nào đó. Nó có thể được gọi và tái sử dụng nhiều lần.
+- Khi thấy hàm được gọi, compiler sẽ phải lưu con trỏ chương trình PC hiện tại vào stack; chuyển PC tới hàm được gọi, 
+thực hiện hàm đó xong và lấy kết quả trả về; sau đó quay lại vị trí ban đầu trong stack trước khi gọi hàm và tiếp tục thực hiện chương trình.
+  
+ --------***---------
+ 
+ 5.Struct VÀ Union
+ - Struct: là 1 kiểu dữ liệu người dùng tự định nghĩa cho phép lưu trữ các loại phần tử khác nhau
+ - Union: là dữ liệu đặc biệt cho phép lưu trữ các kiểu dữ liệu khác nhau trong cùng 1 vùng nhớ. Có thể định nghĩa Union với rất nhiều tham số, nhưng chỉ 1 thành phần chứa giá trị tại một thời điểm. 
+ - So sánh :Cả 2 đều giống nhau về ý nghĩa nhưng về khả năng lưu trữ thì :
+   +	Struct: Dữ liệu của các thành viên của struct được lưu trữ ở những vùng nhớ khác nhau. Do đó kích thước của 1 struct tối thiểu bằng kích thước các thành viên cộng lại tại vì còn phụ thuộc vào bộ nhớ đệm (struct padding)
+   +  Union : Dữ liệu các thành viên sẽ dùng chung 1 vùng nhớ. Kích thước của union được tính là kích thước lớn nhất của kiểu dữ liệu trong union. Việc thay đổi nội dung của 1 thành viên sẽ dẫn đến thay đổi nội dung của các thành viên khác.
+ 
+  --------***---------
+  
+  6.Con trỏ :
+  - Là những biến lưu trữ địa chỉ bộ nhớ cửa những biến khác
+  - Con trỏ Null là con trỏ lưu địa chỉ 0x00000000 và giá trị =0. Tức địa chỉ bộ nhớ 0, có ý nghĩa đặc biệt, cho biết con trỏ không trỏ vào đâu cả. 
+  - Con trỏ Void là con trỏ có thể trỏ đến bất cứ kiểu biến nào và chỉ có thể lưu địa chỉ, muốn lấy giá trị của địa chỉ thì phải ép kiểu cho nó.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
